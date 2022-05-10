@@ -1,0 +1,48 @@
+ <div class="row">
+                    <div class="col-lg-12">
+                                    <h1> Remitentes </h1>
+                            </div>
+ </div>
+ <hr />
+  <div class="row">
+     <div class="col-lg-8">
+                        <div class="box">
+                            <header>
+                                <h5>Lista Remitente</h5>
+                                <div class="toolbar">
+                                    <div class="btn-group">
+                                        <a href="#sortableTable" data-toggle="collapse" class="btn btn-default btn-sm accordion-toggle minimize-box">
+                                            <i class="icon-chevron-up"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </header>
+                            <div id="sortableTable" class="body in" style="height: auto;">
+                                <table class="table table-bordered sortableTable responsive-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#<i class="icon-sort"></i><i class="icon-sort-down"></i> <i class="icon-sort-up"></i></th>
+                                            <th>NOMBRES REMITENTE<i class="icon-sort"></i><i class="icon-sort-down"></i> <i class="icon-sort-up"></i></th>
+                                            <th>EMAIL<i class="icon-sort"></i><i class="icon-sort-down"></i> <i class="icon-sort-up"></i></th>
+                                            <th style="text-align:center;" colspan="2">...<i class="icon-sort"></i><i class="icon-sort-down"></i> <i class="icon-sort-up"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbl_remitente">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Jill</td>
+                                            <td>Smith</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+     <div class="col-lg-6">
+     </div>
+  </div>
+  <script>
+$(document).ready(function () {
+        LISTAREMITENTE_ALL()
+     });
+</script>

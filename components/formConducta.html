@@ -1,0 +1,256 @@
+ <!-- Sweetalert Css -->
+    <link href="./assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
+ <div class="row">
+                    <div class="col-lg-12">
+                                    <h1> Conductas Vulneradoras </h1>
+                            </div>
+                    </div>
+ <hr />
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="box dark">
+                <header>
+                <div class="icons"><i class="icon-edit"></i></div>
+                <h5>Formulario Conductas</h5>
+                <!-- <div class="toolbar">
+                        <ul class="nav">
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <i class="icon-th-large"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                <li><a href="#">Demo Link</a></li>
+                                <li><a href="#">Demo Link</a></li>
+                                <li><a href="#">Demo Link</a></li>
+                                </ul>
+                        </li>
+                        </ul>
+                </div> -->
+                </header>
+                <div id="div-1" class="accordion-body in body">
+                <form action="#" class="form-horizontal" id="form-conducta">
+
+                        <div class="form-group">
+                        <label class="control-label col-lg-4">NUMERO RADICADO</label>
+                        <div class="col-lg-8">
+                                  <input type="text" id="txtnumradicado" name="txtnumradicado" class="form-control" readonly>
+                                  <input type="hidden" id="codradicado" name="codradicado" value="0"/>
+                        </div> 
+                        </div>
+
+                        <div class="form-group">
+                                <label class="control-label col-lg-4">CONDUCTAS VULNERADORAS</label>
+                                <div class="col-lg-8">
+                                 <div class="input-group">
+                                <select data-placeholder="Conductas" id="lstconductas" name="lstconductas"  class="form-control chzn-select" multiple="multiple" tabindex="4" style="padding: 5px 20px 5px 5px;">
+                                 <option value="0" selected>seleccione una o mas conductas...</option>
+                                </select>
+
+                                                 <span class="input-group-btn" style="vertical-align:baseline;">
+                                                    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#formModal_conducta" onclick="LISTACONDUCTAS_V()">
+                                                    <i class="icon-eye-open"></i> 
+                                                    </button>
+                                                 </span>
+
+                                </div>
+                                </div>
+                         </div>
+
+                        <div class="form-group">
+                        <label for="limiter" class="control-label col-lg-4">RECOMENDACIONES ALERTAS TEMPRANAS</label>
+
+                        <div class="col-lg-8">
+                                <textarea id="txtrecomendaciones_at" name="txtrecomendaciones_at" class="form-control"></textarea>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="text4" class="control-label col-lg-4">RECOMENDACIONES INFORME SEGUIMIENTO</label>
+
+                        <div class="col-lg-8">
+                                <textarea id="txtrecomendaciones_is" name="txtrecomendaciones_is" class="form-control"></textarea>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="autosize" class="control-label col-lg-4">OFICIO CONSUMACION</label>
+
+                        <div class="col-lg-8">
+                                <textarea id="txtoficio_c" name="txtoficio_c" class="form-control"></textarea>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="autosize" class="control-label col-lg-4">GESTION PDDHH</label>
+
+                        <div class="col-lg-8">
+                                <textarea id="txtgerstionpddhh" name="txtgerstionpddhh" class="form-control"></textarea>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="autosize" class="control-label col-lg-4">RESPUESTA SOLICITUD</label>
+
+                        <div class="col-lg-8">
+                                <textarea id="txtrespuesta_s" name="txtrespuesta_s" class="form-control"></textarea>
+                        </div>
+                        
+                        </div>
+
+                        <div class="form-group">
+                        <label for="autosize" class="control-label col-lg-4">OTROS ASUNTOS</label>
+
+                        <div class="col-lg-8">
+                                <textarea id="txtotros_asuntos" name="txtotros_asuntos" class="form-control"></textarea>
+                        </div>
+                        
+                        </div>
+
+                        <div class="form-group">
+                        <label for="tags" class="control-label col-lg-4"></label>
+                        <div class="col-lg-8">
+                              <div class="form-actions no-margin-bottom" style="text-align:center;width:100%">
+                                             <button  type="submit" class="btn btn-primary btn-lg btn-line" style="width:100%">
+                                                Enviar Conducta Vulneradoras
+                                            </button>
+                                        </div>
+                        </div>
+                        </div>
+                </form>
+                </div>
+        </div>
+        </div>
+
+
+        <!-- inicio del formulario modal -->
+<div class="col-lg-12">
+            <div class="modal fade" id="formModal_conducta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form action="#" id="form-remite" role="form">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="H2">CONDUCTAS VULNERADORAS</h4>
+                                        </div>
+                                        <div id="modal-body-list" class="modal-body" style="padding:1px;">
+                                           <!--  <div class="form-group"> -->
+                                              <!--   <div class="panel panel-success"> -->
+                                                <div class="panel-body" style="padding:1px;">
+                                                  <div class="col-lg-12" style="padding-right: 1px;padding-left: 1px;">
+                                                   <div class="box">
+                                                        <header>
+                                                                <div class="icons">
+                                                                <span class="checked"><input id="ch0" class="uniform" type="checkbox"></span>
+                                                                </div>
+                                                                <h5>Lista Conductas Vulneradoras</h5>
+                                                        </header>
+                                                        <div class="containerescroltablaPp">
+                                                            <div class="body" id="listaCV">
+                                                                        <!-- <div class="checkbox anim-checkbox">
+                                                                                        <input type="checkbox" id="ch2" class="primary">
+                                                                                        <label for="ch2">Primary</label>
+                                                                        </div> -->
+                                                                </div>
+                                                           </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel-footer">
+                                                        <div class="input-group">
+                                                        <input id="txt_conducta" type="text" class="form-control input-sm" 
+                                                        placeholder="Ingrese nueva conducta...">
+                                                        <span class="input-group-btn">
+                                                                <button type="button" onclick="Conducta_b()" class="btn btn-success btn-sm" id="btn-chat">
+                                                                 Crear nueva conducta
+                                                                </button>
+                                                                <input type="hidden" id="numconductamax" name="numconductamax" value="0"/>
+                                                        </span>
+                                                        </div>
+                                                </div>
+
+                                            <!-- </div> -->
+                                        <!--  </div> -->
+                                        </div>
+
+                                        <div class="modal-footer bg-gray">
+                                                    <button type="button" onclick="CARGACONDUCTA()" class="btn btn-primary btn-sm" id="btn-chat" style="width: 100%;">
+                                                        Agregar Conductas Vulneradoras
+                                            </button>
+                                         
+                                        </div>
+
+                                     </form>   
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <!-- fin del formulario modal -->
+   
+    </div>
+ <script>
+    jQuery(function ($) {
+                                /*----------- BEGIN chosen CODE -------------------------*/
+
+                                $(".chzn-select").chosen();
+                                $(".chzn-select-deselect").chosen({
+                                        allow_single_deselect: true
+                                });
+                                /*----------- END chosen CODE -------------------------*/
+                
+                        $('#form-conducta').validate({
+                                rules: {
+
+                                        lstconductas: {
+                                                required: true,
+                                        },
+
+                                        txtrecomendaciones_at: {
+                                                required: true,
+                                        },
+
+                                        txtrecomendaciones_is: {
+                                                required: true,
+                                        },
+                                        txtoficio_c: {
+                                                required: true,
+                                        },
+                                        txtgerstionpddhh: {
+                                                required: true,
+                                        },
+
+                                        txtrespuesta_s: {
+                                                required: true,
+                                        },
+                                        txtotros_asuntos: {
+                                                required: true,
+                                        },
+                                        
+                                },
+                                messages: {
+                                        lstconductas: "Ingrese nombre",
+                                        txtrecomendaciones_at: "ingrese una recomendacion",
+                                        txtrecomendaciones_is: "ingrese una recomendacion",
+                                        txtoficio_c: "Ingrese el oficio consumacion",
+                                        txtgerstionpddhh: "Ingrese gestion pddhh",
+                                        txtrespuesta_s: "Ingrese respuest solicitud",
+                                        txtotros_asuntos: "Ingrese otros asuntos",
+                                },
+                                errorClass: 'help-block col-lg-12',
+                                errorElement: 'span',
+
+                                highlight: function (element, errorClass, validClass) {
+                                $(element).parents('.form-group').removeClass('has-success').addClass('has-error');
+                                },
+                                unhighlight: function (element, errorClass, validClass) {
+                                $(element).parents('.form-group').removeClass('has-error').addClass('has-success');
+                                },
+                                submitHandler: function(form) {
+                                        Conductabform()
+                                return false;
+                                }
+                        }); 
+});
+</script>
+    

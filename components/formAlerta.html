@@ -1,0 +1,352 @@
+ <div class="row">
+                    <div class="col-lg-12">
+                                    <h1> Registro especial conductas vulneratorias </h1>
+                            </div>
+                    </div>
+ <hr />
+                 <div class="row">
+                        <div class="col-lg-12">
+                            <div class="box">
+                                <header>
+                                    <div class="icons"><i class="icon-th-large"></i></div>
+                                    <h5>Formulario</h5>
+                                </header>
+                    <div id="collapseOne" class="accordion-body collapse in body">
+
+                        <form action="#" class="form-horizontal" id="inline-validate-at">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4">NUMERO RADICADO</label>
+
+                                            <div class="col-lg-4">
+                                                <input type="text" class="form-control" id="numero_radicado" name="numero_radicado"  />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                        <label class="control-label col-lg-4">REMITENTE</label>    
+                                        <div class="col-lg-4">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="txtremitente" name="txtremitente"  placeholder="Nombres"><span class="input-group-btn" style="vertical-align:baseline;">
+                                                    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#formModal_remite">
+                                                    <i class="icon-group"></i> 
+                                                    </button>
+                                                </span>
+                                                <input type="hidden" id="remitente" name="remitente" value="1"/>
+                                           </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4">FECHA DOCUMENTO</label>
+                                            <div class="col-lg-4">
+                                                <input type="date" id="date2" name="date2" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4">DEPARTAMENTO</label>
+
+                                            <div class="col-lg-4">
+                                                <select id="dpto_at" name="dpto_at" class="form-control">
+                                                    <option value="" selected>Seleccione...</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4">MUNICIPIO</label>
+
+                                            <div class="col-lg-4">
+                                                <select id="id_minic" name="id_minic" class="form-control">
+                                                    <option value="" selected>Seleccione...</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4">CORREGIMIENTO/VEREDA/FINCA</label>
+
+                                            <div class="col-lg-4">
+                                                <div class="input-group">
+                                                 <input type="text" id="txtunidadmingeo" name="txtunidadmingeo" class="form-control" />
+                                                    <span class="input-group-btn" style="vertical-align:baseline;">
+                                                    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#formModal_umg" onclick="formModal_umg()">
+                                                    <i class="icon-search"></i> 
+                                                    </button>
+                                                    <input type="hidden" id="unidadmingeo" name="unidadmingeo" value="0"/>
+                                                 </span>
+                                                 </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4">ASUNTO</label>
+
+                                            <div class="col-lg-4">
+                                                <textarea id="asunto" name="asunto" class="form-control" maxlength="280"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4"></label>
+                                         <div class="col-lg-4">   
+                                        <div class="form-actions no-margin-bottom" style="text-align:center;width:100%">
+                                             <button  type="submit" class="btn btn-primary btn-lg btn-line" style="width:100%">
+                                                Enviar Radicado
+                                            </button>
+                                        </div></div> 
+                                    
+                                    </div>
+                       </form> 
+                                </div>
+                            </div>
+                        </div>
+<!-- inicio del formulario modal -->
+<div class="col-lg-12">
+            <div class="modal fade" id="formModal_remite" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form action="#" id="form-remite" role="form">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="H2">Formulario Remitente</h4>
+                                        </div>
+                                        <div id="modal-body-list" class="modal-body" style="padding:1px;">
+                                            <div class="form-group">
+                                                <div class="panel panel-success">
+
+                                                    <div class="panel-heading">
+                                                        <i class="icon-group"></i> Nombres Remitentes
+                                                    </div>
+
+                                                <div class="panel-body" style="padding:1px;">
+                                                    <div id="listaRTE" class="list-group">
+                                                        
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                         </div>
+                                        </div>
+
+                                        <div id="modal-body-form" class="modal-body" style="display: none;">
+                                
+                                                <div class="form-group">
+                                                    <label>NOMBRE REMITENTE</label>
+                                                    <input type="text" id="nom_remitente" name="nom_remitente" class="form-control" placeholder="Ingrese nombre" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" id="correo" name="correo" class="form-control" placeholder="Ingrese Correo" />
+                                                </div>
+                                                <div class="form-group">
+                                                       <button type="submit" class="btn btn-primary">Guardar</button>
+                                                </div>
+
+                                        </div>
+
+                                        <div class="modal-footer bg-gray">
+                                           <div class="input-group">
+                                                <input  type="text" id="txt-buscar" class="form-control input-sm" placeholder="Tipea el parametro...">
+                                                <span class="input-group-btn">
+                                                    <button type="button" onclick="LISTAREMITENTE()" class="btn btn-success btn-sm" id="btn-chat">
+                                                        Buscar
+                                            </button>
+                                    </span>
+                                </div>
+                                         
+                                        </div>
+
+                                     </form>   
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <!-- fin del formulario modal -->
+
+
+    <!-- inicio del formulario modal -->
+<div class="col-lg-12">
+            <div class="modal fade" id="formModal_umg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form action="#" id="form-umg" role="form">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="H2">unidad minima Georeferencial Municipio <span id="municumg"></span> </h4>
+                                        </div>
+                                        <div id="modal-body-listumg" class="modal-body" style="padding:1px;">
+                                            <div class="form-group">
+                                                <div class="panel panel-success">
+
+                                                    <div class="panel-heading">
+                                                        <i class="icon-group"></i> Nombre Corregimiento/Vereda/Finca 
+                                                    </div>
+
+                                                <div class="panel-body" style="padding:1px;">
+                                                    <div id="listaCVF" class="list-group">
+                                                        
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                         </div>
+                                        </div>
+
+                                        <div id="modal-body-formumg" class="modal-body" style="display: none;">
+                            
+                                                <div class="form-group">
+                                                    <label>NOMBRE CORREGIMIENTO/VEREDA/FINCA</label>
+                                                    <input type="text" id="nom_unidadmingeo" name="nom_unidadmingeo" class="form-control" placeholder="Ingrese nombre" />
+                                                    <input type="hidden" id="codigo_minicumg" name="codigo_minicumg" value="0"/>
+                                                </div>
+                                                <div class="form-group">
+                                                       <button type="submit" class="btn btn-primary">Crear Nueva UMG</button>
+                                                </div>
+
+                                        </div>
+
+                                        <div class="modal-footer bg-gray">
+                                           <div class="input-group">
+                                                <input  type="text" id="txt-buscarumg" class="form-control input-sm" placeholder="Tipea el parametro...">
+                                                <span class="input-group-btn">
+                                                    <button type="button" onclick="LISTAR_UMG()" class="btn btn-success btn-sm" id="btn-chat">
+                                                        Buscar
+                                            </button>
+                                    </span>
+                                </div>
+                                         
+                                        </div>
+
+                                     </form>   
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <!-- fin del formulario modal -->
+
+
+
+                    </div>                   
+<script>
+jQuery(function ($) {
+      $('#inline-validate-at').validate({
+        rules: {
+            numradicado: {
+                required: true,
+            },
+            txtremitente: {
+                required: true,
+            },
+            date2: {
+                required: true,
+                date: true
+            },
+            dpto_at: {
+                required: true,
+                minlength: 1
+            },
+            id_minic: {
+                required: true,
+            },
+            unidadmingeo:{
+                required: true,
+            },
+            asunto: {
+                required: true,
+            },
+        },
+        messages: {
+                numradicado: "Ingrese el radicado",
+                txtremitente: "ingrese el remitente",
+                date2: "Seleccione la fecha",
+                dpto_at: "Seleccione el deparatamento",
+                id_minic: "Seleccione el municipio",
+                unidadmingeo: "Seleccione el unidad minima",
+                asunto: "escriba el asunto",
+            },
+
+        errorClass: 'help-block col-lg-12',
+        errorElement: 'span',
+
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group').removeClass('has-success').addClass('has-error');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group').removeClass('has-error').addClass('has-success');
+        },
+        submitHandler: function(form) {
+                //form.submit();
+                atform()
+         return false;
+        }
+    });
+
+    $('#form-remite').validate({
+        rules: {
+            nom_remitente: {
+                required: true,
+            },
+            correo: {
+                required: true,
+                email: true
+            },
+        },
+        messages: {
+                nom_remitente: "Ingrese nombre",
+                correo: "ingrese el correo electronico",
+            },
+        errorClass: 'help-block col-lg-12',
+        errorElement: 'span',
+
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group').removeClass('has-success').addClass('has-error');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group').removeClass('has-error').addClass('has-success');
+        },
+        submitHandler: function(form) {
+                Remitente()
+         return false;
+        }
+     });   
+     
+     
+ $('#form-umg').validate({
+        rules: {
+            nom_unidadmingeo: {
+                required: true,
+            },
+        },
+        messages: {
+                nom_unidadmingeo: "Ingrese nombre de la UMG",
+            },
+        errorClass: 'help-block col-lg-12',
+        errorElement: 'span',
+
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group').removeClass('has-success').addClass('has-error');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group').removeClass('has-error').addClass('has-success');
+        },
+        submitHandler: function(form) {
+                Add_umg()
+         return false;
+        }
+     });
+
+     
+
+    setTimeout(() => {
+        DPTO()
+    }, 100);
+
+    $("#dpto_at").change(() => {
+        var ID_DPTO = $("#dpto_at").val();
+        MUNICIPIODPTO(ID_DPTO,0)
+    });   
+
+    $("#dpto_umg").change(() => {
+        var ID_DPTO = $("#dpto_umg").val();
+        MUNICIPIODPTO(ID_DPTO,1)
+    });
+});
+</script>
