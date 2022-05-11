@@ -15,17 +15,18 @@ function atform() {
             IdDpto: parseInt($("#dpto_at").val()),
             IdMunicipio: parseInt($("#id_minic").val()),
             IdUmg: parseInt($("#unidadmingeo").val()),
-    }
+        }
     
-    fechtFunction(URL + "/alertatemprana", 'POST', data)
+    fetchFunction(URL + "/alertatemprana", 'POST', data)
         .then(function (result) {
-
+         
+            if (result.status==200){
                 swal({
                     title: "INFORMACION",
                     text: "El radicado ha sido creado satisfatoriamente! Que desea hacer",
                     type: "success",
                     showCancelButton: true,
-                    cancelButtonText: "OK",
+                    cancelButtonText: "Terminar",
                     cancelButtonColor: "#5cb85c",
                     confirmButtonColor: "#DD6B55",                    
                     confirmButtonText: "Cargar Documentos",
@@ -37,8 +38,11 @@ function atform() {
                          $("#codradicado_arch").val(result.id);
                     }, 100);
                 });
-            
+              }else{
+                console.log(result.status)
+              }
             });
+
     return false;
 }
 
@@ -54,7 +58,7 @@ function Conductabform() {
         OtrosAsuntos:$("#txtotros_asuntos").val(),
     }
 
-    fechtFunction(URL + "/criterio", 'POST', data)
+    fetchFunction(URL + "/criterio", 'POST', data)
         .then(function (result) {
             swal("INFORMACION!", "El criterio ha sido creado y enviado satisfatoriamente!", "success");
             $(".confirm").click(function () {
@@ -80,7 +84,7 @@ function Remitente() {
     }
 
 
-    fechtFunction(URL + "/remitente",'POST', data)
+    fetchFunction(URL + "/remitente",'POST', data)
         .then(function (result) {
             console.log(result)
             $("#remitente").val(result.id);
@@ -97,7 +101,7 @@ function Conducta_b() {
         Nombre: $("#txt_conducta").val(),
     }
 
-    fechtFunction(URL + "/conductas", 'POST', data)
+    fetchFunction(URL + "/conductas", 'POST', data)
         .then(function (result) {
 
             var I = parseInt($("#numconductamax").val()) + 1;
@@ -122,7 +126,7 @@ function Conducta_criterio(id) {
         IdCondutas: parseInt($(this).val()),
         }
         
-   fechtFunction(URL + "/conductascriterio", 'POST', data)
+        fetchFunction(URL + "/conductascriterio", 'POST', data)
         .then(function (result) {
 
             console.log(result)
@@ -137,8 +141,8 @@ function Add_umg() {
         IdMunicipio: $("#codigo_minicumg").val(),
         Nombre: $("#nom_unidadmingeo").val(),
     }
-    console.log(data)
-    fechtFunction(URL + "/unidadminimageo", 'POST', data)
+  //  console.log(data)
+    fetchFunction(URL + "/unidadminimageo", 'POST', data)
         .then(function (result) {
 
             //console.log(result)
@@ -155,7 +159,9 @@ function Add_docucmento() {
     I = 0;
     formdata.append("IdCasos", $("#codradicado_arch").val());
     formdata.append("RutaArchivo", archivo0.files[0]);
-    formdata.append("RutaArchivo", archivo1.files[0]);
+
+
+  //  formdata.append("RutaArchivo", archivo1.files[0]);
 
   /*   $('.form-horizontal').find("input:file").each(function (i, elem) {
         formdata.append("IdCasos", $("#codradicado_arch").val());
@@ -170,9 +176,10 @@ function Add_docucmento() {
             }
         }
     }); */
-
+ 
     var requestOptions = {
         method: 'POST',
+        headers: new Headers({ 'Authorization': "Bearer " + sessionStorage.getItem('token') }),
         body: formdata,
         redirect: 'follow'
     };

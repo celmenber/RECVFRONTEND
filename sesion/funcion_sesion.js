@@ -42,7 +42,7 @@ $(document).ready(function () {
 
             $("#btnSubmitpass").html('Entrando...');
 
-            fechtFunction(URL + "/Auth/login", 'POST', data)
+            fetchFunctionLogin(URL + "/Auth/login", 'POST', data)
                 .then(function (result) {
                    // console.log(result)
                     if(result.status==200){

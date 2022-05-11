@@ -3,7 +3,9 @@ function dominio() {
     //var ruta = "https://cobrosapp.co/apiRest_app_cobro/public";
     return ruta;
 }
+
 var token = "Bearer " + sessionStorage.getItem('token');
+
 function ajaxFunction(uri, method, async, data) {
     return jQuery.ajax({
         headers: { 'Authorization': token },
@@ -40,14 +42,10 @@ function ajaxFunction(uri, method, async, data) {
 }
 
 
-function fechtFunction(uri, method, data) {
-    var myHeaders = new Headers();
+function fetchFunction(uri, method, data) {
     
-    myHeaders.append(
-    "Content-Type", 
-    "application/json",
-    "Authorization:" + token
-    );
+    var httpHeaders = { 'Content-Type': 'application/json', 'Authorization': token };
+    var myHeaders = new Headers(httpHeaders);
 
     var requestOptions = {
         method: method,
@@ -57,6 +55,23 @@ function fechtFunction(uri, method, data) {
     };
 
 return fetch(uri, requestOptions)
+        .then(response => response.json())
+        .catch(error => console.log('error', error));
+}
+
+
+function fetchFunctionLogin(uri, method, data) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type","application/json");
+
+    var requestOptions = {
+        method: method,
+        headers: myHeaders,
+        body: data ? JSON.stringify(data) : null,
+        redirect: 'follow'
+    };
+
+    return fetch(uri, requestOptions)
         .then(response => response.json())
         .catch(error => console.log('error', error));
 }
