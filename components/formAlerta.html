@@ -25,7 +25,7 @@
                                         <label class="control-label col-lg-4">REMITENTE</label>    
                                         <div class="col-lg-4">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" id="txtremitente" name="txtremitente"  placeholder="Nombres"><span class="input-group-btn" style="vertical-align:baseline;">
+                                                <input type="text" class="form-control" id="txtremitente" name="txtremitente"  placeholder="Nombres" readonly><span class="input-group-btn" style="vertical-align:baseline;">
                                                     <button class="btn btn-default" type="button" data-toggle="modal" data-target="#formModal_remite">
                                                     <i class="icon-group"></i> 
                                                     </button>
@@ -229,7 +229,7 @@
 jQuery(function ($) {
       $('#inline-validate-at').validate({
         rules: {
-            numradicado: {
+            numero_radicado: {
                 required: true,
             },
             txtremitente: {
@@ -254,7 +254,7 @@ jQuery(function ($) {
             },
         },
         messages: {
-                numradicado: "Ingrese el radicado",
+                numero_radicado: "Ingrese el radicado",
                 txtremitente: "ingrese el remitente",
                 date2: "Seleccione la fecha",
                 dpto_at: "Seleccione el deparatamento",

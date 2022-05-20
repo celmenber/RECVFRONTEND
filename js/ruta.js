@@ -17,3 +17,7 @@ function ini_formConducta() {
 function ini_formArchivos() {
     $("#innercontent").load('../components/formArchivos.html');
 }
+
+function ini_formConfiguracion() {
+    $("#innercontent").load('../components/formConfiguracion.html');
+}

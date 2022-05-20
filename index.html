@@ -52,7 +52,16 @@
                      <input type="text" placeholder="Email como usuario" class="form-control" id="user" name="user" />
                 </div>
                <div class="form-group">
-                   <input type="password" placeholder="Password" class="form-control" id="pass" name="pass" />
+                <div class="input-group">
+                <input type="password" placeholder="Password" class="form-control" id="pass" name="pass" style="margin-bottom: 0;" />
+                <input type="hidden" id="pass_on" value="0">
+                    <span class="input-group-btn">
+                        <button type="button"  class="btn btn-default" title="password" onclick="showclave(1)" id="verclave"
+                         style="height:40px;top: 5px;">
+                            <i class="icon-eye-open"></i>
+                        </button>
+                    </span>
+                </div>
                </div>
                 <div class="form-actions" style="text-align:center">
                      <button type="submit" id="btnSubmitpass" class="btn btn-block btn-primary btn-line btn-lg" >Iniciar sesión</button>
@@ -100,6 +109,24 @@
      <script src="assets/plugins/chosen/chosen.jquery.min.js"></script>
      <script src="./cnn.js"></script>
      <script src="./sesion/funcion_sesion.js"></script>
+
+        <script>
+                  function showclave(sw) {
+                        if (sw == 1) {
+                            if (document.getElementById("pass_on").value == 0) {
+                                $('#pass').removeAttr("type")
+                                $('#pass').attr("type", "text")
+                                $('#verclave').html('<i class="icon-eye-open" aria-hidden="true"></i>')
+                                document.getElementById("pass_on").value = 1
+                            } else {
+                                $('#pass').removeAttr("type")
+                                $('#pass').attr("type", "password")
+                                $('#verclave').html('<i class="icon-eye-close" aria-hidden="true"></i>')
+                                document.getElementById("pass_on").value = 0
+                            }
+                        }
+                    }
+        </script>
 
 </body>
 </html>

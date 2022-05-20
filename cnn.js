@@ -21,22 +21,22 @@ function ajaxFunction(uri, method, async, data) {
         console.log('Error : ' + errorThrown);
         console.log('Error : ' + jqXHR.key);
         console.log('Error : ' + textStatus);
+
+       
         
     }).always(function (jqXHR, textStatus, errorThrown) {
-        //$("#sincbarra").html('<i class="fa fa-refresh fa-lg"></i>');
-        //$("#controlsidebar").html('<i class="fa fa-gear fa-1x"></i>');
-        if (jqXHR.status == 404) {
-           /*  msg_err("<span>No hay respuesta de la pagina N°Error['" + jqXHR.status + "']</span>", '5%');
-            setTimeout($.unblockUI, 3000); */
+        if (jqXHR.status == 401) {
+            console.log('status', jqXHR.status)
+            location.href = "../";
+            return;
+        } else if (jqXHR.status == 404) {
+            console.log('status', jqXHR.status)
         } else if (jqXHR.status == 500) {
-           /*  msg_err("<span>Error Interno del Servidor'" + jqXHR.status + "'</span>", '5%');
-            setTimeout($.unblockUI, 3000); */
+            console.log('status', jqXHR.status)
         } else if (jqXHR.status === 0 && textStatus == "error") {
-
-           // msg_err("<span>No hay conexion Verifique la Red</span>", '15%');
+            console.log('status', jqXHR.status)
         } else if (jqXHR.status === 0 && textStatus === "timeout" && errorThrown === "timeout") {
-           /*  msg_err("<span>conexion lenta Verifique y repita el proceso</span>", '5%');
-            setTimeout($.unblockUI, 3000); */
+            console.log('status', jqXHR.status)
         }
     });
 }
@@ -55,8 +55,15 @@ function fetchFunction(uri, method, data) {
     };
 
 return fetch(uri, requestOptions)
-        .then(response => response.json())
-        .catch(error => console.log('error', error));
+            .then(response => response.json())
+            .catch(error => console.log('error', error));
+
+/*return fetch(uri, requestOptions)
+       .then(function (response){
+        if (!response.ok) throw Error(response.status);
+        response.json()
+        })
+       .catch(error => console.log('error', error));*/
 }
 
 

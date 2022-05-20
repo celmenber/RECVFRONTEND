@@ -137,7 +137,7 @@
             <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light bg-light">
               <!-- LOGO SECTION -->
                 <header class="navbar-header" style="margin-top:0.9%;margin-bottom: 0.1%;">
-                     <a href="index.html" class="navbar-brand">
+                     <a href="index.html" class="navbar-brand" title="logo">
                        <img src="../assets/img/logo.png" alt="" width="40%" />
                      </a>
                 </header>
@@ -176,9 +176,10 @@
                                 <span id="nomuser">nombre usuario</span>
                             </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li class="">User: <span id="iduser">nombre usuario</span></li>
+                           <!--  <li class="">User: <span id="iduser">nombre usuario</span></li> -->
+                            <li><a href="javascript:ini_formConfiguracion(0)"><i class="icon-user"></i> Perfil </a></li>
                             <li class="divider"></li>
-                            <li><a href="javascript:void(0)"><i class="icon-gear"></i> Configuracion </a></li>
+                            <li><a href="javascript:ini_formConfiguracion(0)"><i class="icon-gear"></i> Configuracion </a></li>
                             <li class="divider"></li>
                             <li><a href="javascript:void(0)" id="btnSalir"><i class="icon-signout"></i> Salir </a>
                             </li>
@@ -273,6 +274,7 @@
     <script src="../js/App.js"></script>
     <script src="../utils/utilidadesFuntion.js"></script>
     <script src="../js/funcion_add.js"></script>
+    <script src="../js/helper.js"></script>
 <script>
 $(document).ready(function () {
         //startDB()

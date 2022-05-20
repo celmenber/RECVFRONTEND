@@ -85,8 +85,8 @@ function ALERTA_RADICADO() {
             fila += `<tr>
                         <td>${I}</td>
                         <td><span id="numrad${I}">${array[i].numeroRadicado}</span></td>
-                        <td>${array[i].asunto}.</td>
-                        <td>${array[i].fechaDocumento}</td>
+                        <td style="width:50%;">${array[i].asunto}.</td>
+                        <td>${fechlong(array[i].fechaDocumento)}</td>
                         <td style="text-align:center;">
                             <button class="btn btn-primary" style="width:100%;" Onclick=CONDUCTA(${array[i].id},${I})> Conductas </button>
                                  <br/><br/>
@@ -134,12 +134,12 @@ function LISTAR_UMG() {
         var array = datajson
         var lista = '';
         var I = 0;
-        console.log(datajson)
+      //  console.log(datajson)
         for (var i in array) {
             I = I + 1;
             var municipio = MUNICIPIO(array[i].idMunicipio)
             lista += `<a href="#" class="list-group-item" onclick="CARGAR_UMG(${array[i].id},${I})" data-dismiss="modal" aria-hidden="true">
-                                <i class="icon-ok"></i> <span id="nomr${I}">${array[i].nombre}</span>
+                                <i class="icon-ok"></i> <span id="nomcorreg${I}">${array[i].nombre}</span>
                                 <span class="pull-right text-muted small"><em> ${municipio}</em></span>
                        </a>`;
         }
@@ -206,7 +206,7 @@ function CARGARREMITENTE(id,i) {
 
 function CARGAR_UMG(id, i) {
     $("#unidadmingeo").val(id);
-    $("#txtunidadmingeo").val($("#nomr" + i).text());
+    $("#txtunidadmingeo").val($("#nomcorreg" + i).text());
 }
 
 

@@ -17,10 +17,9 @@ function atform() {
             IdUmg: parseInt($("#unidadmingeo").val()),
         }
     
-    fetchFunction(URL + "/alertatemprana", 'POST', data)
-        .then(function (result) {
-         
-            if (result.status==200){
+    fetchFunction(URL + "/alertatemprana", 'POST', data).then(function (result) {
+              if (result.status==200){
+                  console.log(result);
                 swal({
                     title: "INFORMACION",
                     text: "El radicado ha sido creado satisfatoriamente! Que desea hacer",
@@ -28,19 +27,33 @@ function atform() {
                     showCancelButton: true,
                     cancelButtonText: "Terminar",
                     cancelButtonColor: "#5cb85c",
-                    confirmButtonColor: "#DD6B55",                    
+                    confirmButtonColor: "#5cb85c",                    
                     confirmButtonText: "Cargar Documentos",
                     closeOnConfirm: true
                 }, () => {
                     ini_formArchivos()
                     setTimeout(function () {
-                         $("#txtnumradicado_archivo").text(result.numeroRadicado);
-                         $("#codradicado_arch").val(result.id);
-                    }, 100);
+                        $("#txtnumradicado_archivo").text(result.numRadicado);
+                        $("#codradicado_arch").val(result.id);
+                    }, 200);
                 });
+
+                  $("#remitente").val("")
+                  $("#numero_radicado").val("")
+                  $("#date2").val("")
+                  $("#asunto").val("")
+                  $("#dpto_at").val("")
+                  $("#id_minic").val("")
+                  $("#unidadmingeo").val("")
+                  
               }else{
-                console.log(result.status)
-              }
+                  swal({
+                      title: "INFORMACION",
+                      text: "El Numero de Radicado ya existe!",
+                      type: "error",
+                      confirmButtonColor: "#DD6B55",
+                  });
+              }  
             });
 
     return false;
