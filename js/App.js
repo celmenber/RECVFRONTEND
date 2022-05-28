@@ -18,6 +18,9 @@ function DPTO() {
 
         $("#dpto_at option").remove("option:gt(0)");
         $("#dpto_at").append(op_dpto);
+
+        $("#dpto_radicado option").remove("option:gt(0)");
+        $("#dpto_radicado").append(op_dpto);
     });
 }
 
@@ -70,13 +73,35 @@ function MUNICIPIODPTO(ID_DPTO,sw) {
         } else if (sw == 1) {
          $("#minic_umg option").remove("option:gt(0)");
          $("#minic_umg").append(op_munic);
+        } else if (sw == 2) {
+            $("#munic_radicado option").remove("option:gt(0)");
+            $("#munic_radicado").append(op_munic);
         }
 
     });
 }
 
-function ALERTA_RADICADO() {
-    ajaxFunction(URL + "/alertatemprana", 'GET', true).done(function (datajson) {
+function ALERTA_RADICADO(SW) {
+    var URL_TOTAL
+    var val_fec_doc = $("#chk_fecha").prop('checked') == true ? 1 : 0
+    if(SW==0){
+
+         URL_TOTAL = URL + "/alertatemprana";
+
+    }else{
+
+        URL_TOTAL = URL + "/alertatemprana/FiltrosAT"
+            + "?NumeroRadicado=" + $("#radicado").val()
+            + "&Departamento=" + $("#dpto_radicado").val()
+            + "&Municipio=" + $("#munic_radicado").val()
+            + "&FechaIni=" + $("#fechastart").val()
+            + "&FechaFin=" + $("#fechaend").val()
+            + "&options=" + $('input:radio[name=optionsRadios]:checked').val()
+            +"&check=" + val_fec_doc;
+        }
+
+
+    ajaxFunction(URL_TOTAL, 'GET', true).done(function (datajson) {
         var array = datajson
         var fila = '';
         var I = 0;
@@ -84,8 +109,9 @@ function ALERTA_RADICADO() {
             I = I + 1;
             fila += `<tr>
                         <td>${I}</td>
+                        <td>${fechlong(array[i].fecha)}</td>
                         <td><span id="numrad${I}">${array[i].numeroRadicado}</span></td>
-                        <td style="width:50%;">${array[i].asunto}.</td>
+                        <td style="width:40%;">${array[i].asunto}.</td>
                         <td>${fechlong(array[i].fechaDocumento)}</td>
                         <td style="text-align:center;">
                             <button class="btn btn-primary" style="width:100%;" Onclick=CONDUCTA(${array[i].id},${I})> Conductas </button>
@@ -93,7 +119,7 @@ function ALERTA_RADICADO() {
                              <button class="btn btn-info" style="width:100%;" Onclick=ARCHIVOS(${array[i].id},${I})> Adjuntos </button>
                         </td>
                         <td style="text-align:center;">
-                            <button class="btn btn-warning" Onclick=edit(${array[i].id})> Editar </button>
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#formModal_editrad" Onclick=EDITAR_RADICADO(${array[i].id})> Editar </button>
                             <br/><br/>
                             <button class="btn btn-danger" Onclick=delet(${array[i].id})>  Quitar </button>
                         </td>
@@ -103,6 +129,24 @@ function ALERTA_RADICADO() {
         $("#numradicado").html(I);
     });
 }
+
+function EDITAR_RADICADO(id) {
+    ajaxFunction(URL + "/alertatemprana/" + id, 'GET', true).done(function (datajson) {
+        
+        $("#codigo_radicado").val(datajson.id)
+        $("#numero_radicado_edit").val(datajson.numeroRadicado)
+        $("#date2_edit").val(fechFormato(datajson.fechaDocumento))
+        $("#Fecha_edit").val(fechFormato(datajson.fecha))
+        $("#txtremitente_edit").val(datajson.idRemitente)
+        $("#dpto_edit").val(datajson.idDpto)
+        $("#minic_edit").val(datajson.idMunicipio)
+        $("#unidadmingeo_edit").val(datajson.idUmg)
+        $("#asuntoedit").val(datajson.asunto)  
+
+    });
+}
+
+
 
 function LISTAREMITENTE() {
     ajaxFunction(URL + "/remitente/ObtenerRemitenteNOMBRE/" + $("#txt-buscar").val(), 'GET', true).done(function (datajson) {

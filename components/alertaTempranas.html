@@ -1,4 +1,6 @@
  <!--TABLE, PANEL, ACCORDION AND MODAL  -->
+<link rel="stylesheet" href="../assets/plugins/uniform/themes/default/css/uniform.default.css" />
+<link rel="stylesheet" href="../assets/plugins/switch/static/stylesheets/bootstrap-switch.css" />
     <div class="row">
                     <div class="col-lg-12">
                         <h2> LISTA DE RADICADOS</h2>
@@ -9,26 +11,80 @@
                     <div class="col-lg-12">
                         <div class="body">
                             <form id="validVal" class="form-inline" novalidate="novalidate">
+                                <div class="box" style="border: 0px solid #efefef;">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="input-group">
+                                            <label for="chk_fecha" class="control-label col-lg-6" style="margin-top: 5px;">FECHA DOC.</label>
+                                            <div class="col-lg-6" style="left: -25px;">
+                                                <div class="make-switch switch">
+                                                    <input type="checkbox" id="chk_fecha" name="chk_fecha" value="0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2" style="margin-top: 5px;">
+                                        <div class="checkbox">
+                                            <label>
+                                            <input class="uniform" type="radio" id="optionsRadios1" name="optionsRadios" value="1" checked="checked" />  
+                                            <b>Por Fecha</b>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2" style="margin-top: 5px;">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input class="uniform" type="radio" id="optionsRadios2" name="optionsRadios" value="2" /> 
+                                                <b>Por Radicado</b>  
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2" style="margin-top: 5px;">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input class="uniform" type="radio" id="optionsRadios3" name="optionsRadios" value="3" /> 
+                                                <b>Por Territorio</b>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="input-group pull-right" style="margin-left:5px;">
+                                            <button type="button" class="btn btn-success btn-line" style="width:100%;">
+                                                Exportar Radicados</button>
+                                        </div>
+                                    </div>
+                                </div></div>
                                 <div class="row form-group">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
                                       <div class="input-group">
                                         <span class="input-group-addon"><i class="icon-calendar"></i>
                                         </span>
-                                        <input type="text" class="form-control" id="daterange-btn" />
+                                        <input type="text" class="form-control" id="daterange-btn"/>
                                         <input type="hidden"  id="fechastart" value="0">
                                         <input type="hidden"  id="fechaend" value="0">
                                        </div>
                                     </div>
-                                    <div class="col-lg-8">
-                                         <div class="input-group pull-right">
-                                             <button type="button" class="btn btn-info btn-line">Consultar Radicados</button>
-                                         </div>
-                                        
+                                    <div class="col-lg-2">
+                                        <input type="text" id="radicado" name="radicado" class="form-control" placeholder="NUMERO RADICADO">
                                     </div>
-
+                                    <div class="col-lg-2">
+                                        <select id="dpto_radicado" name="dpto_radicado" class="form-control">
+                                        <option value="0" selected>DEPARTAMENTO...</option>
+                                     </select>
+                                   </div>
+                                    <div class="col-lg-3">
+                                        <select id="munic_radicado" name="munic_radicado" class="form-control">
+                                            <option value="0" selected>MUNICIPIO...</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="input-group pull-right">
+                                            <button type="button" class="btn btn-info btn-line" onclick="ALERTA_RADICADO(1)"  style="width:100%;">
+                                                Consultar lista radicados</button>
+                                        </div>
+                                      </div>
                                 </div>
-
-
                             </form>
                         </div>
                         <div class="box">
@@ -37,6 +93,8 @@
                                     <thead>
                                         <tr>
                                             <th>ITEM</th>
+                                            <th>FECHA PROCESO<i class="icon-sort"></i><i class="icon-sort-down"></i> <i class="icon-sort-up"></i>
+                                            </th>
                                             <th>RADICADO<i class="icon-sort"></i><i class="icon-sort-down"></i> 
                                                 <i class="icon-sort-up"></i></th>
                                             <th>ASUNTO<i class="icon-sort"></i><i class="icon-sort-down"></i> <i class="icon-sort-up"></i></th>
@@ -53,34 +111,112 @@
                            
                         </div>
                     </div>
+
+
+
+                    <!-- inicio del formulario modal -->
+                    <div class="col-lg-12">
+                        <div class="modal fade" id="formModal_editrad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="#" id="form-umg" role="form">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="H2">Actualizar Radicado <span id="numradicado"></span> </h4>
+                                        </div>
+                    
+                                        <div id="modal-body-formumg" class="modal-body">
+                                            <form role="form">
+                                                <div class="form-group">
+                                                    <label>RADICADO</label>
+                                                    <input type="text" id="numero_radicado_edit" name="numero_radicado_edit" class="form-control">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>REMITENTE</label>
+                                                    <input type="text" class="form-control" id="txtremitente_edit" name="txtremitente_edit">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>FECHA DOCUMENTO</label>
+                                                    <input type="date" id="date2_edit" name="date2_edit" class="form-control" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>DEPARTAMENTO</label>
+                                                    <input type="text" class="form-control" id="dpto_edit" name="dpto_edit">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>MUNICIPIO</label>
+                                                    <input type="text" class="form-control" id="minic_edit" name="minic_edit">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>CORREGIMIENTO/VEREDA/FINCA</label>
+                                                    <input type="text" class="form-control" id="unidadmingeo_edit" name="unidadmingeo_edit">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>ASUNTO</label>
+                                                <textarea id="asuntoedit" name="asuntoedit" class="form-control" maxlength="280"></textarea>
+                                                </div>
+                                                <input type="hidden" id="codigo_radicado" name="codigo_radicado" value="0" />
+                                            </form>
+                    
+                                        </div>
+                    
+                                        <div class="modal-footer bg-gray">
+
+                                            <div class="form-group">
+                                                <button type="button" onclick="atform_edit()" class="btn btn-primary">Editar Radicado</button>
+                                            </div>
+                    
+                                        </div>
+                    
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- fin del formulario modal -->
                 </div>
+<script src="../assets/plugins/switch/static/js/bootstrap-switch.min.js"></script>
+<script src="../assets/plugins/uniform/jquery.uniform.min.js"></script>
 <script>
 jQuery(function ($) {
-       ALERTA_RADICADO()
+       ALERTA_RADICADO(0)
+  setTimeout(() => {
+        DPTO()
+    }, 100);
+
+    $("#dpto_radicado").change(() => {
+        var ID_DPTO = $("#dpto_radicado").val();
+        MUNICIPIODPTO(ID_DPTO, 2)
+    });
 
 $('#daterange-btn').daterangepicker(
-        {
-          ranges: {
-            'hoy': [moment(), moment()],
-           // 'Mañana': [moment().subtract(-1, 'days'), moment().subtract(-1, 'days')],
-            'Ayer': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'últimos 7 días': [moment().subtract(6, 'days'), moment().subtract(0, 'days')],
-            'Este Mes': [moment().startOf('month'), moment().endOf('month')],
-           // 'Proximo Mes': [moment().subtract(-1, 'month').startOf('month'), moment().subtract(-1, 'month').endOf('month')],
-            'último Mes': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-          },
-          startDate: moment().subtract(29, 'days'),
-          endDate: moment()
-        },
+            {
+            ranges: {
+                'hoy': [moment(), moment()],
+                'Ayer': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'últimos 7 días': [moment().subtract(6, 'days'), moment().subtract(0, 'days')],
+                'Este Mes': [moment().startOf('month'), moment().endOf('month')],
+                'último Mes': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            locale: {
+                format: 'DD/MM/YYYY',
+            },
+            startDate: moment().subtract(1, 'days'),
+            endDate: moment()
+            },
             function (start, end) {
-            $('#daterange-btn span').html('<i class="fa fa-calendar"></i> '+ 
-            start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-            
-                $('#fechastart').val(start.format('YYYY-MM-DD'));
-                $('#fechaend').val(end.format('YYYY-MM-DD'));
-                // listaCitas()
-            }
-        );
+
+                 $('#daterange-btn span').html('<i class="fa fa-calendar"></i> '+ 
+                 start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                 $('#fechastart').val(start.format('YYYY-MM-DD'));
+                 $('#fechaend').val(end.format('YYYY-MM-DD'));
+
+            });
+
+             $('#fechastart').val(fech_hoy(0));
+             $('#fechaend').val(fech_hoy(0));
+             $('#daterange-btn').val(fech_hoy(1) + ' - ' + fech_hoy(1));
      });
 </script>
                  <!--TABLE   -->

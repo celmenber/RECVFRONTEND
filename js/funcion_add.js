@@ -19,7 +19,7 @@ function atform() {
     
     fetchFunction(URL + "/alertatemprana", 'POST', data).then(function (result) {
               if (result.status==200){
-                  console.log(result);
+               //   console.log(result);
                 swal({
                     title: "INFORMACION",
                     text: "El radicado ha sido creado satisfatoriamente! Que desea hacer",
@@ -55,6 +55,44 @@ function atform() {
                   });
               }  
             });
+
+    return false;
+}
+
+function atform_edit() {
+
+    var data = {
+        IdRemitente: $("#txtremitente_edit").val(),
+        NumeroRadicado: $("#numero_radicado_edit").val(),
+        FechaDocumento: $("#date2_edit").val(),
+        Asunto: $("#asuntoedit").val(),
+        IdDpto: parseInt($("#dpto_edit").val()),
+        IdMunicipio: parseInt($("#minic_edit").val()),
+        IdUmg: parseInt($("#unidadmingeo_edit").val()),
+    }
+
+    fetchFunction(URL + "/alertatemprana/" + $("#codigo_radicado").val(), 'PUT', data).then(function (result) {
+        if (result.status == 200) {
+
+         $("#txtremitente_edit").val("")
+         $("#numero_radicado_edit").val("")
+         $("#date2_edit").val("")
+         $("#asuntoedit").val("")
+         $("#dpto_edit").val("")
+         $("#minic_edit").val("")
+         $("#unidadmingeo_edit").val("")
+
+            CierraPopup("formModal_editrad")
+
+       }else {
+        swal({
+            title: "INFORMACION",
+            text: "El Numero de Radicado ya existe!",
+            type: "error",
+            confirmButtonColor: "#DD6B55",
+        });
+    }
+    });
 
     return false;
 }
