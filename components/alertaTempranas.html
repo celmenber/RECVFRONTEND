@@ -134,7 +134,9 @@
 
                                                 <div class="form-group">
                                                     <label>REMITENTE</label>
-                                                    <input type="text" class="form-control" id="txtremitente_edit" name="txtremitente_edit">
+                                                    <select data-placeholder="Your Favorite Type of Bear" id="txtremitente_edit" name="txtremitente_edit" class="form-control chzn-select chzn-rtl" tabindex="9">
+                                                        <!-- -->
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>FECHA DOCUMENTO</label>
@@ -142,21 +144,28 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>DEPARTAMENTO</label>
-                                                    <input type="text" class="form-control" id="dpto_edit" name="dpto_edit">
+                                                    <select id="dpto_edit" name="dpto_edit" class="form-control">
+                                                        <option value="0" selected>DEPARTAMENTO...</option>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>MUNICIPIO</label>
-                                                    <input type="text" class="form-control" id="minic_edit" name="minic_edit">
+                                                    <select id="minic_edit" name="minic_edit" class="form-control">
+                                                        <option value="0" selected>MUNICIPIO...</option>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>CORREGIMIENTO/VEREDA/FINCA</label>
-                                                    <input type="text" class="form-control" id="unidadmingeo_edit" name="unidadmingeo_edit">
+                                                    <select data-placeholder="Your Favorite Type of Bear" id="unidadmingeo_edit" name="unidadmingeo_edit" class="form-control chzn-select chzn-rtl" tabindex="9">
+                                                        <!-- -->
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>ASUNTO</label>
                                                 <textarea id="asuntoedit" name="asuntoedit" class="form-control" maxlength="280"></textarea>
                                                 </div>
                                                 <input type="hidden" id="codigo_radicado" name="codigo_radicado" value="0" />
+                                                <input type="hidden" id="Fecha_edit" name="Fecha_edit" value="0" />
                                             </form>
                     
                                         </div>
@@ -180,9 +189,17 @@
 <script src="../assets/plugins/uniform/jquery.uniform.min.js"></script>
 <script>
 jQuery(function ($) {
-       ALERTA_RADICADO(0)
+
+    //$(".chzn-select").chosen();
+    /* $(".chzn-select-deselect").chosen({
+        allow_single_deselect: true
+    }); */
+
+  ALERTA_RADICADO(0)
   setTimeout(() => {
         DPTO()
+        LISTAREMITENTE_EDIT()
+        LISTAR_UMG_EDIT()
     }, 100);
 
     $("#dpto_radicado").change(() => {

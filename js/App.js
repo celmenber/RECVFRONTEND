@@ -21,6 +21,9 @@ function DPTO() {
 
         $("#dpto_radicado option").remove("option:gt(0)");
         $("#dpto_radicado").append(op_dpto);
+
+        $("#dpto_edit option").remove("option:gt(0)");
+        $("#dpto_edit").append(op_dpto);
     });
 }
 
@@ -59,6 +62,32 @@ function LISTAREMITENTE_ALL() {
     });
 }
 
+function LISTAREMITENTE_EDIT() {
+    ajaxFunction(URL + "/remitente", 'GET', true).done(function (datajson) {
+        var array = datajson
+        var op_remitente = '';
+        for (var i in array) {
+            op_remitente += "<option value='" + array[i].id + "'>" + array[i].nombreRemitente + "</option>";
+        }
+
+        $("#txtremitente_edit option").remove("option:gt(0)");
+        $("#txtremitente_edit").append(op_remitente);
+   });
+}
+
+function LISTAR_UMG_EDIT() {
+    ajaxFunction(URL + "/unidadminimageo", 'GET', true).done(function (datajson) {
+        var array = datajson
+        var op_omg = '';
+        for (var i in array) {
+            op_omg += "<option value='" + array[i].id + "'>" + array[i].nombre + "</option>";
+        }
+
+        $("#unidadmingeo_edit option").remove("option:gt(0)");
+        $("#unidadmingeo_edit").append(op_omg);
+    });
+}
+
 function MUNICIPIODPTO(ID_DPTO,sw) {
     ajaxFunction(URL + "/municipio/ObtenerMunicipioDPTO/" + ID_DPTO, 'GET', true).done(function (datajson) {
         var array = datajson
@@ -76,6 +105,9 @@ function MUNICIPIODPTO(ID_DPTO,sw) {
         } else if (sw == 2) {
             $("#munic_radicado option").remove("option:gt(0)");
             $("#munic_radicado").append(op_munic);
+        } else if (sw == 3) {
+            $("#minic_edit option").remove("option:gt(0)");
+            $("#minic_edit").append(op_munic);
         }
 
     });
@@ -121,7 +153,7 @@ function ALERTA_RADICADO(SW) {
                         <td style="text-align:center;">
                             <button class="btn btn-warning" data-toggle="modal" data-target="#formModal_editrad" Onclick=EDITAR_RADICADO(${array[i].id})> Editar </button>
                             <br/><br/>
-                            <button class="btn btn-danger" Onclick=delet(${array[i].id})>  Quitar </button>
+                            <button class="btn btn-danger" Onclick=ELIMINAR_RADICADO(${array[i].id})>  Quitar </button>
                         </td>
                     </tr>`;
         }
@@ -133,20 +165,49 @@ function ALERTA_RADICADO(SW) {
 function EDITAR_RADICADO(id) {
     ajaxFunction(URL + "/alertatemprana/" + id, 'GET', true).done(function (datajson) {
         
+        MUNICIPIODPTO(datajson.idDpto, 3)
         $("#codigo_radicado").val(datajson.id)
         $("#numero_radicado_edit").val(datajson.numeroRadicado)
         $("#date2_edit").val(fechFormato(datajson.fechaDocumento))
-        $("#Fecha_edit").val(fechFormato(datajson.fecha))
-        $("#txtremitente_edit").val(datajson.idRemitente)
-        $("#dpto_edit").val(datajson.idDpto)
-        $("#minic_edit").val(datajson.idMunicipio)
-        $("#unidadmingeo_edit").val(datajson.idUmg)
+        $("#Fecha_edit").val(datajson.fecha)
         $("#asuntoedit").val(datajson.asunto)  
 
+        setTimeout(() => {
+            $("#dpto_edit").val(datajson.idDpto)
+            $("#minic_edit").val(datajson.idMunicipio)
+            $("#txtremitente_edit").val(datajson.idRemitente)
+            $("#unidadmingeo_edit").val(datajson.idUmg)
+        }, 100);
+        
     });
 }
 
-
+function ELIMINAR_RADICADO(id) {
+    swal({
+        title: "ELIMINAR",
+        text: "Esta seguro que desea eliminar este radicado",
+        type: "error",
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+        confirmButtonColor: "#d9534f",
+        confirmButtonText: "Eliminar",
+        closeOnConfirm: true
+    }, () => {
+        ajaxFunction(URL + "/alertatemprana/" + id, 'DELETE', true).done(function (result) {
+            
+            if (result.status == 202) {
+                swal("INFORMACION!", "El radicado  ha sido eliminado satisfatoriamente!", "success");
+                $(".confirm").click(function () {
+                 ALERTA_RADICADO(1) 
+                });
+            }else{
+                console.log(result.status)
+            }
+           
+        });
+    });
+    
+}
 
 function LISTAREMITENTE() {
     ajaxFunction(URL + "/remitente/ObtenerRemitenteNOMBRE/" + $("#txt-buscar").val(), 'GET', true).done(function (datajson) {
@@ -285,14 +346,24 @@ function LISTAR_ARCHIVOS(id) {
         var I = 0;
         for (var i in array) {
             I = I + 1;
-            lista += `<a href="${array[i].rutaArchivo}" class="list-group-item" target="_blank">
-                                    <i class="icon-file"></i> ${array[i].nombreArchivo}
-                                    <span class="pull-right text-muted small"><em> ${array[i].tipoArchivo}</em>
-                                    </span>
-                                    </a>`;
+
+            lista += `<div class="btn-group" style="width:100%">
+                            <a href="${array[i].rutaArchivo}" class="btn btn-default" target="_blank" style="width:80%;text-align: left;">
+                            <i class="icon-file"></i> ${array[i].nombreArchivo}
+                            </a>
+                            <a download="${array[i].nombreArchivo}" href="${array[i].rutaArchivo}" class="btn btn-default" target="_blank">
+                            <i class="icon-cloud-download"></i>
+                            </a>
+                            <a href="#" class="btn btn-default" onclick="DELETEARCHIVO(${array[i].id},${I})"><i class="icon-trash"></i></a>
+                            </div>`;
         }
         $("#listdoc").html(lista);
     });
+}
+
+function DELETEARCHIVO(id, i) {
+  alert(id)
+
 }
 
 function ARCHIVOS(id, i) {

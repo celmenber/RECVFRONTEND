@@ -19,7 +19,6 @@ function atform() {
     
     fetchFunction(URL + "/alertatemprana", 'POST', data).then(function (result) {
               if (result.status==200){
-               //   console.log(result);
                 swal({
                     title: "INFORMACION",
                     text: "El radicado ha sido creado satisfatoriamente! Que desea hacer",
@@ -64,6 +63,7 @@ function atform_edit() {
     var data = {
         IdRemitente: $("#txtremitente_edit").val(),
         NumeroRadicado: $("#numero_radicado_edit").val(),
+        Fecha: $("#Fecha_edit").val(),
         FechaDocumento: $("#date2_edit").val(),
         Asunto: $("#asuntoedit").val(),
         IdDpto: parseInt($("#dpto_edit").val()),
@@ -81,7 +81,7 @@ function atform_edit() {
          $("#dpto_edit").val("")
          $("#minic_edit").val("")
          $("#unidadmingeo_edit").val("")
-
+            ALERTA_RADICADO(1) 
             CierraPopup("formModal_editrad")
 
        }else {
@@ -210,23 +210,6 @@ function Add_docucmento() {
     I = 0;
     formdata.append("IdCasos", $("#codradicado_arch").val());
     formdata.append("RutaArchivo", archivo0.files[0]);
-
-
-  //  formdata.append("RutaArchivo", archivo1.files[0]);
-
-  /*   $('.form-horizontal').find("input:file").each(function (i, elem) {
-        formdata.append("IdCasos", $("#codradicado_arch").val());
-
-        /*var elemento = this;
-        
-        if (elemento.type === 'file') {
-            if (elemento.value !== '') {
-                var file_data = $('input[type="file"]')[i].files;
-                console.log(file_data)
-                formdata.append("RutaArchivo", elemento.name, file_data);
-            }
-        }
-    }); */
  
     var requestOptions = {
         method: 'POST',
